@@ -4,6 +4,7 @@
 // @version      0.2
 // @description  为北+提供关键词屏蔽功能
 // @author       sl
+// @match        https://*.level-plus.net/thread.php?fid-*
 // @match        https://*.white-plus.net/thread.php?fid-*
 // @match        https://*.south-plus.net/thread.php?fid-*
 // @match        https://*.imoutolove.me/thread.php?fid-*

@@ -4,6 +4,7 @@
 // @version      0.2
 // @description  替换丧尸头像，屏蔽图片，公共场合也能上北+
 // @author       sl
+// @match        https://*.level-plus.net/read.php?tid*
 // @match        https://*.white-plus.net/read.php?tid*
 // @match        https://*.south-plus.net/read.php?tid*
 // @match        https://*.imoutolove.me/read.php?tid*

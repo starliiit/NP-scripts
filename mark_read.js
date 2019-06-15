@@ -4,6 +4,7 @@
 // @version      0.1
 // @description  Mark read thread.
 // @author       sl
+// @match        https://*.level-plus.net/thread.php?fid-*
 // @match        https://*.white-plus.net/thread.php?fid-*
 // @match        https://*.south-plus.net/thread.php?fid-*
 // @match        https://*.imoutolove.me/thread.php?fid-*
