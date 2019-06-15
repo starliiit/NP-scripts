@@ -1,16 +1,17 @@
 // ==UserScript==
 // @name         North-Plus Auto Task
-// @namespace    https://github.com/sssssssl/NP-scripts
+// @namespace    https://github.com/starliiit
 // @version      0.4
 // @description  自动领取和完成北+日常和周常任务
 // @author       sl
+// @match        https://*.level-plus.net
+// @match        https://*.level-plus.net/index.php
 // @match        https://*.white-plus.net
 // @match        https://*.white-plus.net/index.php
 // @match        https://*.south-plus.net
 // @match        https://*.white-plus.net/index.php
 // @match        https://*.imoutolove.me
 // @match        https://*.imoutolove.me/index.php
-// @require      https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
 // @grant GM_setValue
 // @grant GM_getValue
 // ==/UserScript==
@@ -20,50 +21,51 @@
 
     // Your code here...
 
-    var taskBaseURL = 'plugin.php?H_name=tasks&action=ajax&actions=job&cid=';
-    var rewardBaseURL = 'plugin.php?H_name=tasks&action=ajax&actions=job2&cid=';
+    const TASK_BASEURL = 'plugin.php?H_name=tasks&action=ajax&actions=job&cid=';
+    const REWARD_BASEURL = 'plugin.php?H_name=tasks&action=ajax&actions=job2&cid=';
 
-    var taskDailyID = '15';
-    var taskWeeklyID = '14';
+    const DAILY_ID = '15';
+    const WEEKLY_ID = '14';
 
-    var taskDailyKey = 'lastTaskDaily';
-    var taskWeeklyKey = 'lastTaskWeekly';
+    const TASK_DAILY_KEY = 'lastTaskDaily';
+    const TASK_WEEKLY_KEY = 'lastTaskWeekly';
 
-    var taskDailyInterval = 1000 * 60 * 60 * 24;
-    var taskWeeklyInterval = taskDailyInterval * 7;
+    const HOUR = 1000 * 60 * 60;
+    const DAILY_INTERVAL = HOUR * 18;
+    const WEEKLY_INTERVAL = HOUR * 158;
+
+    const TIME_BEING_GRACEFUL = 1500;
+
 
     function checkTask(now, taskID, taskKey, taskInterval) {
-        var lastSignIn = GM_getValue(taskKey);
+        let lastSignIn = GM_getValue(taskKey);
         if (lastSignIn === undefined || (now - lastSignIn) > taskInterval) {
             // 领取任务
-            $.get(taskBaseURL + taskID, function (data, status) {
-                console.log(data);
-                console.log(status);
+            ajax.send(TASK_BASEURL + taskID, '', function () {
+                console.log(ajax.request.responseText);
 
                 setTimeout(function () {
                     // 等 1.5s，领取奖励
-                    $.get(rewardBaseURL + taskID, function (data, status) {
-                        console.log(data);
-                        console.log(status);
-
+                    ajax.send(REWARD_BASEURL + taskID, '', function () {
+                        console.log(ajax.request.responseText);
                         GM_setValue(taskKey, now);
                     });
-                }, 1500);
+                }, TIME_BEING_GRACEFUL);
 
             });
         }
         else {
             // do nothing.
-            var interval = (now - lastSignIn) / (1000);
-            console.log('距离上次任务过了 ' + interval + ' 秒');
+            let interval = (now - lastSignIn) / (HOUR);
+            console.log('距离上次任务过了 ' + interval + ' 小时');
         }
     }
 
-    var now = Date.now();
-    checkTask(now, taskDailyID, taskDailyKey, taskDailyInterval);
+    let now = Date.now();
+    checkTask(now, DAILY_ID, TASK_DAILY_KEY, DAILY_INTERVAL);
     setTimeout(function () {
-        checkTask(now, taskWeeklyID, taskWeeklyKey, taskWeeklyInterval);
-    }, 1500);
+        checkTask(now, WEEKLY_ID, TASK_WEEKLY_KEY, WEEKLY_INTERVAL);
+    }, TIME_BEING_GRACEFUL);
 
 
 })();
