@@ -57,7 +57,7 @@
         else {
             // do nothing.
             let interval = (now - lastSignIn) / (HOUR);
-            console.log('距离上次任务过了 ' + interval + ' 小时');
+            console.log('距离上次任务过了 ' + interval.toFixed(2) + ' 小时');
         }
     }
 
