@@ -21,6 +21,8 @@
 
     // Your code here...
 
+    const LOGIN_SPAN_ID = 'login_0';
+
     const TASK_BASEURL = 'plugin.php?H_name=tasks&action=ajax&actions=job&cid=';
     const REWARD_BASEURL = 'plugin.php?H_name=tasks&action=ajax&actions=job2&cid=';
 
@@ -63,11 +65,16 @@
         }
     }
 
-    let now = Date.now();
-    checkTask(now, DAILY_ID, TASK_DAILY_KEY, DAILY_INTERVAL);
-    setTimeout(function () {
-        checkTask(now, WEEKLY_ID, TASK_WEEKLY_KEY, WEEKLY_INTERVAL);
-    }, TIME_BEING_GRACEFUL);
+    // 检查是否已经登录
+    if(document.getElementById(LOGIN_SPAN_ID) === null) {
+
+        let now = Date.now();
+        checkTask(now, DAILY_ID, TASK_DAILY_KEY, DAILY_INTERVAL);
+        setTimeout(function () {
+            checkTask(now, WEEKLY_ID, TASK_WEEKLY_KEY, WEEKLY_INTERVAL);
+        }, TIME_BEING_GRACEFUL);
+
+    }
 
 
 })();
