@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         North-Plus Auto Task
 // @namespace    https://github.com/starliiit
-// @version      0.4.0
+// @version      0.5.0
 // @description  自动领取和完成北+日常和周常任务
 // @author       sl
 // @match        https://*.level-plus.net
