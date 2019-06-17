@@ -32,7 +32,9 @@
 
     const HOUR = 1000 * 60 * 60;
     const DAILY_INTERVAL = HOUR * 18;
-    const WEEKLY_INTERVAL = HOUR * 158;
+
+    // const WEEKLY_INTERVAL = HOUR * 158;
+    const WEEKLY_INTERVAL = DAILY_INTERVAL;
 
     const TIME_BEING_GRACEFUL = 1500;
 
